@@ -121,7 +121,6 @@
      (list stmt)]
     
     [`(Assign (targets (,(or 'Tuple 'List) . ,exprs)) (value ,expr))
-     ; TODO: split tuple assignments apart
      (error "finish me")]
        
     [`(Assign (targets ,t1 ,t2 . ,ts) (value ,expr))
