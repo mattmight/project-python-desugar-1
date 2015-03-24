@@ -203,15 +203,16 @@
   ; Store the fields in a dictionary:
   (define $fields '(Name __dict__))
 
-  ; If it's a class variable, replace it with a dictionary look-up:
+
   (match expr
     [`(Name ,var) 
      ; =>
-     (if (eq? (var-scope) 'class)
+     (if (and (set-member? (local-vars) var) (eq? (var-scope) 'class))
          `(Subscript ,$fields (Index (Str ,(symbol->string var))))
          expr)]
     
     [else expr]))
+
 
 
 
