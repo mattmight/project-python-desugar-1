@@ -7,12 +7,6 @@ In this project, you will desugar constructs in Python.
 Assume Python has been parsed into the format described in
 the python-to-s-expression converter for the input.
 
-To simplify matters, the transformation need not be "error-raise-preserving."
-
-That is, you may opt to use a transformation that does not raise an `Error`
-when Python would have raised an `Error`.
-
-Rather than raise an error, your implementation may do anything.
 
 
 Provided utilities
@@ -233,12 +227,31 @@ becomes:
 def $tmp1($tmp2 = object,*$tmp3,metaclass = type,**$tmp4):
   __dict__ = {}
   (__dict__)["y"] = 10
-  return metaclass("X",(($tmp2,)) + ($tmp3),__dict__)
+  return metaclass("X",($tmp2,) + $tmp3,__dict__)
 
 X = $tmp1()
 x = X()
 print(x.y)
 ```
+
+
+
+Simplifications
+---------------
+
+  1. The transformation need not be "error-raise-preserving."
+
+     That is, you may opt to use a transformation that does not raise an
+     `Error`-level exception when Python would have raised an `Error`-level
+     exception.
+  
+     Rather than raise an error, your implementation may do anything.
+
+  2. You may assume that the names in `builtins` are never assigned.  (This
+     will make it easier to write hygienic transformations that want to 
+     desugar into builtins.)  For example, you can assume `list` will always
+     be the `list` class.
+
 
 
 
@@ -350,8 +363,8 @@ The output must conform to the following grammar:
      | (NameConstant <name-constant>)
      | (Ellipsis)
 
-     -- the following expression can appear in assignment context:
-     -- NOTE: Starred form has been eliminated:
+     ; the following expression can appear in assignment context:
+     ; NOTE: Starred form has been eliminated:
      | (Attribute <expr> <identifier>)
      | (Subscript <expr> <slice>)
      | (Name <identifier>)
