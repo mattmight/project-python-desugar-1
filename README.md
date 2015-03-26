@@ -63,7 +63,7 @@ def <name>(<parameters>):
 becomes:
 
 ```
-def f(<parameters>):
+def <name>(<parameters>):
   <body>
 <name> = <decorator>(<name>)
 ```
