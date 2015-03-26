@@ -392,13 +392,13 @@ The output must conform to the following grammar:
 
 <arguments> ::= (Arguments
                    (args <arg>*)
-                   (arg-types <expr?>*)
+                   (arg-types #f*)
                    (vararg <arg?>) 
                    (kwonlyargs <arg>*)
-                   (kwonlyarg-types <expr?>*)
-                   (kwdefaults <expr>*)
+                   (kwonlyarg-types #f*)
+                   (kw_defaults #f*)
                    (kwarg <arg?>) 
-                   (defaults <expr?>*))
+                   (defaults #f*))
  
 <arg> ::= <identifier>
 
