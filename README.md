@@ -318,7 +318,7 @@ The output must conform to the following grammar:
       ;; Added:
 
       ; Use Local to specify variables assinged here:
-      | (Local <identifier>+) 
+      | (Local <identifier>*) 
 
       ; Use Comment to specify a comment (useful in debugging):
       | (Comment <string>)
